@@ -12,13 +12,7 @@ reps_to_follow = [
 
 
 
-
-
-
-
-
-
-
-
-
 ]
+
+small_buy = 10 # When your rep buys over $1000
+big_buy = 50 # When your rep buys over $5000
