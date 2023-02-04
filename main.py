@@ -49,6 +49,8 @@ def load_json_into_data_frame():
     else:
         print('Currently no data available for today! Go buy that guy a coffee to wake him up!')
         print(urls.get('donate_tim'))
+        print('Also wouldn\'t hurt to help taux1c out too!')
+        print(urls.get('donate_taux1c'))
         return
 def build_reps():
     reps = []
@@ -66,7 +68,7 @@ def build_reps():
         return reps
 def create_actions_list():
     reps = build_reps()
-    if reps:
+    if reps is not None:
         trades = {}
         for rep in reps:
             trades.update({"{} {}".format(rep.first_name,rep.last_name):[]})
@@ -78,7 +80,8 @@ def create_actions_list():
 
 
 actions = create_actions_list()
-for rep in actions:
-    print(rep)
-    for action in actions.get(rep):
-        print(action)
+if actions is not None:
+    for rep in actions:
+        print(rep)
+        for action in actions.get(rep):
+            print(action)
