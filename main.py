@@ -13,6 +13,12 @@ urls = {
     'xmlEP':'https://house-stock-watcher-data.s3-us-west-2.amazonaws.com/data/filemap.xml',
     'data_base':'https://house-stock-watcher-data.s3-us-west-2.amazonaws.com',
 }
+class representative():
+    def __init__(self,rep):
+        self.first_name = rep.split('|')[0].strip()
+        self.last_name = rep.split('|')[1].strip()
+        self.transactions_types = rep.split('|')[-1].lower().strip()
+        self.transactions = []
 def fetch(location):
     headers = {}
     with httpx.Client(headers=headers,http2=True) as c:
@@ -26,41 +32,34 @@ def xml_keys():
 def is_today_available():
     today_date_object = datetime.date.today()
     today_strftime = today_date_object.strftime("_%m_%d_%Y.json")
-    today_strftime = "_01_30_2023.json"
+    today_strftime = "_12_22_2022.json"
     for key in xml_keys():
         if key.endswith(today_strftime):
             return key
     return False
-def todays_transactions_indexes():
+def load_json_into_data_frame():
     key = is_today_available()
     if key:
-        indexes = []
         js_url = urllib.parse.urljoin(urls.get('data_base'),key)
         js = fetch(js_url).json()
         data = pd.DataFrame(js)
-        for name in config.reps_to_follow:
-            last_name = name.split('|')[1].strip()
-            first_name = name.split('|')[0].strip()
-            transaction_types = name.split('|')[-1].strip()
+        return data
+def build_reps():
+    reps = []
+    data = load_json_into_data_frame()
+    print(data.to_string())
+    for r in config.reps_to_follow:
+        rep = representative(r)
+        reps.append(rep)
+        d = data.index[data['last_name'] == rep.last_name].tolist()
+        for x in d:
+           if data.iloc[x]['first_name'] == rep.first_name:
+               transactions = data.iloc[x]['transactions']
+               for t in transactions:
+                   rep.transactions.append(t)
+    return reps
 
-
-            # if transaction_types.strip().lower() == 'a':
-            #     t = 'All'
-            # elif transaction_types.strip().lower() == 'b':
-            #     t = 'purchase'
-            # elif transaction_types.strip().lower() == 's':
-            #     t = 'SELL'
-            # r = data.index[data['last_name'] == last_name.lower().capitalize()].tolist()
-            # for i in r:
-            #     if data.iloc[i]['first_name'] == first_name and data.iloc[i]['type'] == :
-            #         indexes.append(r)
-        # RETURN A LIST THAT HAS A LIST OF TRANSACTIONS FOR EACH FOLLOWED REP.
-        return indexes
-def process_transactions():
-    transaction_indexes = todays_transactions_indexes()
-    for rep in
-
-
-
-
-
+reps = build_reps()
+for rep in reps:
+    for t in rep.transactions:
+        print(t.get('ticker'),t.get('transaction_type'))
