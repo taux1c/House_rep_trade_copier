@@ -42,7 +42,7 @@ def todays_transactions_indexes():
             last_name = name.split('|')[1].strip()
             first_name = name.split('|')[0].strip()
             transaction_types = name.split('|')[-1].strip()
-            
+
 
             # if transaction_types.strip().lower() == 'a':
             #     t = 'All'
