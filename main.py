@@ -23,7 +23,7 @@ class representative():
         self.transactions = []
 def fetch(location):
     headers = {}
-    with httpx.Client(headers=headers,http2=True) as c:
+    with httpx.Client(headers=config.browser_headers,http2=True) as c:
         soup = c.get(location)
     return soup
 def xml_keys():

@@ -20,3 +20,4 @@ big_buy = 50 # When your rep buys over $15,000
 webull_username = 'test@test.com'
 webull_password = 'pa$$w0rd'
 webull_trade_token = '123456'
+browser_headers = {}
