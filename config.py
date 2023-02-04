@@ -8,6 +8,7 @@ reps_to_follow = [
     # In this case you would buy and then sell which could just cost a bunch of money in transaction fees.
 
     "Nancy | Pelosi | a",
+    "Christopher L. | Jacobs | a",
 
 
 

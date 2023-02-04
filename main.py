@@ -34,7 +34,7 @@ def xml_keys():
 def is_today_available():
     today_date_object = datetime.date.today()
     today_strftime = today_date_object.strftime("_%m_%d_%Y.json")
-    today_strftime = "_12_14_2022.json"
+    today_strftime = "_01_20_2023.json"
     for key in xml_keys():
         if key.endswith(today_strftime):
             return key
@@ -54,7 +54,6 @@ def build_reps():
     reps = []
     data = load_json_into_data_frame()
     if data is not None:
-        print(data.to_string())
         for r in config.reps_to_follow:
             rep = representative(r)
             reps.append(rep)
