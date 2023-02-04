@@ -7,7 +7,7 @@ from pathlib import Path
 import pandas as pd
 import json
 import config
-
+from webull import webull
 database_file = Path('trade_info.db')
 urls = {
     'xmlEP':'https://house-stock-watcher-data.s3-us-west-2.amazonaws.com/data/filemap.xml',
@@ -64,9 +64,21 @@ def build_reps():
                    for t in transactions:
                        rep.transactions.append(t)
         return reps
+def create_actions_list():
+    reps = build_reps()
+    if reps:
+        trades = {}
+        for rep in reps:
+            trades.update({"{} {}".format(rep.first_name,rep.last_name):[]})
+            for t in rep.transactions:
+                # print(t.get('ticker'),t.get('transaction_type'),t.get('amount'))
+                trades.get("{} {}".format(rep.first_name,rep.last_name)).append((t.get('ticker'),t.get('transaction_type'),t.get('amount')))
+        return trades
 
-reps = build_reps()
-if reps:
-    for rep in reps:
-        for t in rep.transactions:
-            print(t.get('ticker'),t.get('transaction_type'))
+
+
+actions = create_actions_list()
+for rep in actions:
+    print(rep)
+    for action in actions.get(rep):
+        print(action)

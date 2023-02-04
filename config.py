@@ -15,5 +15,8 @@ reps_to_follow = [
 
 ]
 
-small_buy = 10 # When your rep buys over $1000
-big_buy = 50 # When your rep buys over $5000
+small_buy = 10 # When your rep buys $1000 - $15,000
+big_buy = 50 # When your rep buys over $15,000
+webull_username = 'test@test.com'
+webull_password = 'pa$$w0rd'
+webull_trade_token = '123456'
