@@ -34,7 +34,7 @@ def xml_keys():
 def is_today_available():
     today_date_object = datetime.date.today()
     today_strftime = today_date_object.strftime("_%m_%d_%Y.json")
-    today_strftime = "_01_20_2023.json" # This has to be removed before it will work.
+    # today_strftime = "_01_20_2023.json" # For testing purposes
     for key in xml_keys():
         if key.endswith(today_strftime):
             return key
