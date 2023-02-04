@@ -13,7 +13,7 @@ urls = {
     'xmlEP':'https://house-stock-watcher-data.s3-us-west-2.amazonaws.com/data/filemap.xml',
     'data_base':'https://house-stock-watcher-data.s3-us-west-2.amazonaws.com',
     'donate_tim':'https://ko-fi.com/rambat',
-    'donate_taux1c':'',
+    'donate_taux1c':'https://www.buymeacoffee.com/taux1c',
 }
 class representative():
     def __init__(self,rep):
